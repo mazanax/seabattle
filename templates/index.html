@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sea Battle</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+<div class="wrapper">
+    <div class="window player">
+        <h1 id="player_name">Ваше поле</h1>
+        <table id="field" class="field">
+            <tr>
+                <td class="legend">#</td>
+                <td class="legend">A</td>
+                <td class="legend">B</td>
+                <td class="legend">C</td>
+                <td class="legend">D</td>
+                <td class="legend">E</td>
+                <td class="legend">F</td>
+                <td class="legend">G</td>
+                <td class="legend">H</td>
+                <td class="legend">I</td>
+                <td class="legend">J</td>
+            </tr>
+            <tr>
+                <td class="legend">1</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td class="legend">2</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td class="legend">3</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td class="legend">4</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td class="legend">5</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td class="legend">6</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td class="legend">7</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td class="legend">8</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td class="legend">9</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td class="legend">10</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </table>
+
+        <div class="row center">
+            <button id="btn-regenerate" class="btn regenerate" onclick="generateField();return false;">
+                Перегенерировать
+            </button>
+        </div>
+    </div>
+
+    <div class="window opponent">
+        <h1 id="opponent_name">Поле противника</h1>
+        <table id="opponent-field" class="field opponent">
+            <tr>
+                <td class="legend">#</td>
+                <td class="legend">A</td>
+                <td class="legend">B</td>
+                <td class="legend">C</td>
+                <td class="legend">D</td>
+                <td class="legend">E</td>
+                <td class="legend">F</td>
+                <td class="legend">G</td>
+                <td class="legend">H</td>
+                <td class="legend">I</td>
+                <td class="legend">J</td>
+            <tr>
+                <td class="legend">1</td>
+                <td onclick="makeShot(0, 0);return false;"></td>
+                <td onclick="makeShot(1, 0);return false;"></td>
+                <td onclick="makeShot(2, 0);return false;"></td>
+                <td onclick="makeShot(3, 0);return false;"></td>
+                <td onclick="makeShot(4, 0);return false;"></td>
+                <td onclick="makeShot(5, 0);return false;"></td>
+                <td onclick="makeShot(6, 0);return false;"></td>
+                <td onclick="makeShot(7, 0);return false;"></td>
+                <td onclick="makeShot(8, 0);return false;"></td>
+                <td onclick="makeShot(9, 0);return false;"></td>
+            </tr>
+            <tr>
+                <td class="legend">2</td>
+                <td onclick="makeShot(0, 1);return false;"></td>
+                <td onclick="makeShot(1, 1);return false;"></td>
+                <td onclick="makeShot(2, 1);return false;"></td>
+                <td onclick="makeShot(3, 1);return false;"></td>
+                <td onclick="makeShot(4, 1);return false;"></td>
+                <td onclick="makeShot(5, 1);return false;"></td>
+                <td onclick="makeShot(6, 1);return false;"></td>
+                <td onclick="makeShot(7, 1);return false;"></td>
+                <td onclick="makeShot(8, 1);return false;"></td>
+                <td onclick="makeShot(9, 1);return false;"></td>
+            </tr>
+            <tr>
+                <td class="legend">3</td>
+                <td onclick="makeShot(0, 2);return false;"></td>
+                <td onclick="makeShot(1, 2);return false;"></td>
+                <td onclick="makeShot(2, 2);return false;"></td>
+                <td onclick="makeShot(3, 2);return false;"></td>
+                <td onclick="makeShot(4, 2);return false;"></td>
+                <td onclick="makeShot(5, 2);return false;"></td>
+                <td onclick="makeShot(6, 2);return false;"></td>
+                <td onclick="makeShot(7, 2);return false;"></td>
+                <td onclick="makeShot(8, 2);return false;"></td>
+                <td onclick="makeShot(9, 2);return false;"></td>
+            </tr>
+            <tr>
+                <td class="legend">4</td>
+                <td onclick="makeShot(0, 3);return false;"></td>
+                <td onclick="makeShot(1, 3);return false;"></td>
+                <td onclick="makeShot(2, 3);return false;"></td>
+                <td onclick="makeShot(3, 3);return false;"></td>
+                <td onclick="makeShot(4, 3);return false;"></td>
+                <td onclick="makeShot(5, 3);return false;"></td>
+                <td onclick="makeShot(6, 3);return false;"></td>
+                <td onclick="makeShot(7, 3);return false;"></td>
+                <td onclick="makeShot(8, 3);return false;"></td>
+                <td onclick="makeShot(9, 3);return false;"></td>
+            </tr>
+            <tr>
+                <td class="legend">5</td>
+                <td onclick="makeShot(0, 4);return false;"></td>
+                <td onclick="makeShot(1, 4);return false;"></td>
+                <td onclick="makeShot(2, 4);return false;"></td>
+                <td onclick="makeShot(3, 4);return false;"></td>
+                <td onclick="makeShot(4, 4);return false;"></td>
+                <td onclick="makeShot(5, 4);return false;"></td>
+                <td onclick="makeShot(6, 4);return false;"></td>
+                <td onclick="makeShot(7, 4);return false;"></td>
+                <td onclick="makeShot(8, 4);return false;"></td>
+                <td onclick="makeShot(9, 4);return false;"></td>
+            </tr>
+            <tr>
+                <td class="legend">6</td>
+                <td onclick="makeShot(0, 5);return false;"></td>
+                <td onclick="makeShot(1, 5);return false;"></td>
+                <td onclick="makeShot(2, 5);return false;"></td>
+                <td onclick="makeShot(3, 5);return false;"></td>
+                <td onclick="makeShot(4, 5);return false;"></td>
+                <td onclick="makeShot(5, 5);return false;"></td>
+                <td onclick="makeShot(6, 5);return false;"></td>
+                <td onclick="makeShot(7, 5);return false;"></td>
+                <td onclick="makeShot(8, 5);return false;"></td>
+                <td onclick="makeShot(9, 5);return false;"></td>
+            </tr>
+            <tr>
+                <td class="legend">7</td>
+                <td onclick="makeShot(0, 6);return false;"></td>
+                <td onclick="makeShot(1, 6);return false;"></td>
+                <td onclick="makeShot(2, 6);return false;"></td>
+                <td onclick="makeShot(3, 6);return false;"></td>
+                <td onclick="makeShot(4, 6);return false;"></td>
+                <td onclick="makeShot(5, 6);return false;"></td>
+                <td onclick="makeShot(6, 6);return false;"></td>
+                <td onclick="makeShot(7, 6);return false;"></td>
+                <td onclick="makeShot(8, 6);return false;"></td>
+                <td onclick="makeShot(9, 6);return false;"></td>
+            </tr>
+            <tr>
+                <td class="legend">8</td>
+                <td onclick="makeShot(0, 7);return false;"></td>
+                <td onclick="makeShot(1, 7);return false;"></td>
+                <td onclick="makeShot(2, 7);return false;"></td>
+                <td onclick="makeShot(3, 7);return false;"></td>
+                <td onclick="makeShot(4, 7);return false;"></td>
+                <td onclick="makeShot(5, 7);return false;"></td>
+                <td onclick="makeShot(6, 7);return false;"></td>
+                <td onclick="makeShot(7, 7);return false;"></td>
+                <td onclick="makeShot(8, 7);return false;"></td>
+                <td onclick="makeShot(9, 7);return false;"></td>
+            </tr>
+            <tr>
+                <td class="legend">9</td>
+                <td onclick="makeShot(0, 8);return false;"></td>
+                <td onclick="makeShot(1, 8);return false;"></td>
+                <td onclick="makeShot(2, 8);return false;"></td>
+                <td onclick="makeShot(3, 8);return false;"></td>
+                <td onclick="makeShot(4, 8);return false;"></td>
+                <td onclick="makeShot(5, 8);return false;"></td>
+                <td onclick="makeShot(6, 8);return false;"></td>
+                <td onclick="makeShot(7, 8);return false;"></td>
+                <td onclick="makeShot(8, 8);return false;"></td>
+                <td onclick="makeShot(9, 8);return false;"></td>
+            </tr>
+            <tr>
+                <td class="legend">10</td>
+                <td onclick="makeShot(0, 9);return false;"></td>
+                <td onclick="makeShot(1, 9);return false;"></td>
+                <td onclick="makeShot(2, 9);return false;"></td>
+                <td onclick="makeShot(3, 9);return false;"></td>
+                <td onclick="makeShot(4, 9);return false;"></td>
+                <td onclick="makeShot(5, 9);return false;"></td>
+                <td onclick="makeShot(6, 9);return false;"></td>
+                <td onclick="makeShot(7, 9);return false;"></td>
+                <td onclick="makeShot(8, 9);return false;"></td>
+                <td onclick="makeShot(9, 9);return false;"></td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="status">
+        <p id="state--1">Ищем противника</p>
+        <p id="state"></p>
+        <button id="btn-start" class="btn start" onclick="sendReady();return false;">Начать игру</button>
+    </div>
+</div>
+
+<script>
+    let player_battlefield = [];
+    let request_in_progress = false;
+    let game_started = false;
+    let battlefield_rendered = false;
+    let status_interval;
+
+    let clearField = function () {
+        document.querySelectorAll('.ship').forEach(el => {
+            el.classList.remove('ship');
+        });
+    };
+
+    let generateField = function () {
+        clearField();
+
+        fetch('/battlefield', {method: 'POST'})
+            .then(response => response.json())
+            .then(json => renderBattlefield(json));
+    };
+
+    let renderBattlefield = function (json) {
+        let field = document.getElementById('field');
+        let rows = field.querySelectorAll('tr');
+        for (let y = 0; y < rows.length - 1; y++) {
+            let cols = rows[y + 1].querySelectorAll('td');
+
+            for (let x = 0; x < cols.length - 1; x++) {
+                if (json[y][x] === 'x') {
+                    cols[x + 1].classList.add('ship');
+                }
+            }
+        }
+
+        player_battlefield = json;
+        battlefield_rendered = true;
+    };
+
+    let updateBattlefield = function (field, shots) {
+        let rows = field.querySelectorAll('tr');
+
+        for (let shot of shots) {
+            let coords = shot.target.split(':');
+
+            rows[parseInt(coords[1]) + 1]
+                .querySelectorAll('td')[parseInt(coords[0]) + 1].classList.add(shot.hit_on_target ? 'hit' : 'miss');
+        }
+    };
+
+    let checkStatus = function () {
+        return fetch('/status')
+            .then(response => response.json())
+            .then(json => refreshStatus(json));
+    };
+
+    let youArePlayer1 = function (player, game) {
+        return game.player1.uuid === player.uuid;
+    }
+
+    let humanizeState = function (youArePlayer1, state) {
+        switch (state) {
+            case 0:
+                return youArePlayer1 ? 'Противник ожидает ваш ход' : 'Ожидаем ход противника';
+            case 2:
+                return youArePlayer1 ? 'Ожидаем ход противника' : 'Противник ожидает ваш ход';
+            case 1:
+                return youArePlayer1 ? 'Ожидаем противника' : 'Противник ожидает вас';
+            case 3:
+                return youArePlayer1 ? 'Противник ожидает вас' : 'Ожидаем противника';
+        }
+    };
+
+    let refreshStatus = function (json) {
+        document.querySelectorAll('.status>p').forEach(el => {
+            el.style.display = 'none';
+        })
+
+        if (json.game.state === -1) {
+            document.getElementById('state--1').style.display = 'block';
+        }
+
+        if (json.game.state !== null && json.game.state !== -1 && json.game.state !== 4) {
+            let stateField = document.getElementById('state');
+            stateField.style.display = 'block';
+            stateField.innerText = humanizeState(youArePlayer1(json.player, json.game), json.game.state)
+        }
+
+        let btnStart = document.getElementById('btn-start');
+        game_started = json.game.state === 2
+            || json.game.state === 0
+            || youArePlayer1(json.player, json.game) && json.game.state === 1
+            || !youArePlayer1(json.player, json.game) && json.game.state === 3;
+
+        btnStart.style.display = game_started ? 'none' : 'inline-block';
+        btnStart.disabled = game_started ? 'disabled' : '';
+
+        let showRegenerateButton = json.game.state === -1
+            || json.game.state === 4
+            || youArePlayer1(json.player, json.game) && json.game.state === 3
+            || !youArePlayer1(json.player, json.game) && json.game.state === 1
+
+        if (!showRegenerateButton) {
+            let btnRegenerate = document.getElementById('btn-regenerate');
+            btnRegenerate.style.display = 'none';
+            btnRegenerate.disabled = 'disabled';
+        }
+
+        document.getElementById('player_name').innerText = json.player.name + ' (Вы)';
+
+        if (json.game.state !== -1) {
+            document.getElementById('opponent_name').innerText = youArePlayer1(json.player, json.game)
+                ? json.game.player2.name
+                : json.game.player1.name;
+        }
+
+        if (game_started) {
+            renderBattlefield(json.battlefield);
+        }
+
+        updateBattlefield(document.getElementById('opponent-field'), youArePlayer1(json.player, json.game) ? json.game.player1.shots : json.game.player2.shots);
+        updateBattlefield(document.getElementById('field'), youArePlayer1(json.player, json.game) ? json.game.player2.shots : json.game.player1.shots);
+
+        if (json.game.state === 2 && youArePlayer1(json.player, json.game) || json.game.state === 0 && !youArePlayer1(json.player, json.game)) {
+            document.getElementById('opponent-field').style.opacity = '.6';
+        } else {
+            document.getElementById('opponent-field').style.opacity = '1';
+        }
+
+        request_in_progress = false;
+    };
+
+    let sendReady = function () {
+        if (request_in_progress) {
+            return;
+        }
+        request_in_progress = true;
+        document.getElementById('btn-start').disabled = 'disabled';
+
+        fetch('/action?act=ready', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json;charset=utf-8'},
+            body: JSON.stringify(player_battlefield)
+        })
+            .then(response => response.json())
+            .then(json => refreshStatus(json));
+    };
+
+    let makeShot = function (x, y) {
+        if (request_in_progress) {
+            return;
+        }
+        request_in_progress = true;
+
+        fetch('/action?act=shot', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+            body: 'target=' + x + ':' + y,
+        })
+            .then(response => response.json())
+            .then(json => refreshStatus(json))
+    };
+
+    checkStatus()
+        .then(() => {
+            if (!game_started || !battlefield_rendered) {
+                generateField();
+            }
+
+            status_interval = setInterval(checkStatus, 5000);
+        });
+</script>
+</body>
+</html>

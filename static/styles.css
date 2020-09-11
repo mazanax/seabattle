@@ -1,0 +1,130 @@
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+.wrapper {
+    width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.window {
+    width: 595px;
+    margin: 0;
+    padding: 0;
+}
+
+.window > h1 {
+    text-align: center;
+}
+
+.field {
+    border: 0;
+    margin: 0 auto;
+    padding: 0;
+    border-spacing: 2px;
+}
+
+.field td {
+    background: #fefefe;
+    width: 40px;
+    height: 40px;
+    border: 1px solid #888;
+    text-align: center;
+}
+
+.field td.legend {
+    background: #fff;
+    width: 20px;
+    height: 20px;
+    font-weight: bold;
+    border: 0;
+}
+
+.field td.ship {
+    background: #ccc;
+}
+
+.field.opponent td:hover {
+    background: #f0f0f0;
+}
+
+.field td.miss,
+.field.opponent td.miss:hover {
+    background: #f0f0f0;
+    content: "•";
+}
+
+td.miss:before {
+    display: block;
+    content: ' ';
+    background: #888;
+    width: 10px;
+    height: 10px;
+    margin: 0 auto;
+    border-radius: 50%;
+}
+
+.field td.hit,
+.field td.ship.hit,
+.field.opponent td.hit:hover {
+    background: #ffbab9;
+}
+
+.status {
+    width: 100%;
+    margin: 20px 0;
+    padding: 40px;
+    background: #f0f0f0;
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.status > p {
+    display: none;
+}
+
+.row {
+    display: block;
+    margin: 10px 0;
+}
+
+.center {
+    text-align: center;
+}
+
+.btn {
+    border: 1px solid #ccc;
+    background: #fefefe;
+    border-radius: 5px;
+    padding: 10px 40px;
+    font-size: 18px;
+    font-weight: bold;
+    outline: none;
+}
+
+.btn:hover {
+    background: #ccc;
+}
+
+.form-wrapper {
+    width: 600px;
+    margin: 0 auto;
+}
+
+.form {
+    display: block;
+    width: 100%;
+}
+
+.form input {
+    display: block;
+    padding: 10px 20px;
+    width: 100%;
+    margin: 5px 0;
+}
