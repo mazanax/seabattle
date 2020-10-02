@@ -1,7 +1,7 @@
 package generator
 
 import (
-	"seabattle/utils"
+	"github.com/mazanax/seabattle/utils"
 	"strings"
 )
 
@@ -61,7 +61,7 @@ func GenerateField() (string, error) {
 func shipCouldBePlacedHere(field []rune, pos uint64, size uint64, vertical bool) bool {
 	var startLine uint64
 	var endLine uint64
-	var step uint64 // шаг, на который надо сместиться, чтобы проверить линию корабля
+	var step uint64         // шаг, на который надо сместиться, чтобы проверить линию корабля
 	var neighborStep uint64 // шаг, на который надо сместиться, чтобы проверить соседние с кораблем клетки
 
 	if !vertical {
@@ -81,7 +81,7 @@ func shipCouldBePlacedHere(field []rune, pos uint64, size uint64, vertical bool)
 	}
 
 	start := pos
-	if int(pos - 1*step) >= 0 {
+	if int(pos-1*step) >= 0 {
 		start = pos - 1*step
 	}
 
@@ -90,7 +90,7 @@ func shipCouldBePlacedHere(field []rune, pos uint64, size uint64, vertical bool)
 			continue
 		}
 
-		if int(i - neighborStep) > 0 && field[i - neighborStep] != utils.CellEmpty {
+		if int(i-neighborStep) > 0 && field[i-neighborStep] != utils.CellEmpty {
 			return false
 		}
 
@@ -98,7 +98,7 @@ func shipCouldBePlacedHere(field []rune, pos uint64, size uint64, vertical bool)
 			return false
 		}
 
-		if i + neighborStep < 100 && field[i + neighborStep] != utils.CellEmpty {
+		if i+neighborStep < 100 && field[i+neighborStep] != utils.CellEmpty {
 			return false
 		}
 	}

@@ -2,8 +2,8 @@ package main
 
 import (
 	"fmt"
-	"seabattle/generator"
-	"seabattle/utils"
+	"github.com/mazanax/seabattle/generator"
+	"github.com/mazanax/seabattle/utils"
 )
 
 func renderField(field string) {
