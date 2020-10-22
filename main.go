@@ -23,23 +23,14 @@ func renderField(field string) {
 }
 
 func main() {
-	var field [2][]byte
+	var field []byte
 
 	tmpField, err := generator.GenerateField()
 	if nil != err {
 		panic(err)
 	}
 
-	field[0] = tmpField
+	field = tmpField
 
-	tmpField, err = generator.GenerateField()
-	if nil != err {
-		panic(err)
-	}
-
-	field[1] = tmpField
-
-	renderField(string(field[0]))
-	fmt.Println()
-	//renderField()
+	renderField(string(field))
 }
