@@ -1,20 +1,20 @@
 package generator
 
 import (
+	"bytes"
 	"github.com/mazanax/seabattle/utils"
-	"strings"
 )
 
-var sizes = [4]uint64{4, 3, 2, 1}
+var sizes = [4]int64{4, 3, 2, 1}
 
-func GenerateField() (string, error) {
-	field := []rune(strings.Repeat(string(utils.CellEmpty), 100))
-	ships := [4]uint64{1, 2, 3, 4}
+func GenerateField() ([]byte, error) {
+	field := bytes.Repeat([]byte{utils.CellEmpty}, 100)
+	ships := [4]int64{1, 2, 3, 4}
 	currentShip := 0
 
 	for {
-		var pos uint64
-		var step uint64
+		var pos int64
+		var step int64
 		var vertical bool
 
 		for {
@@ -23,7 +23,7 @@ func GenerateField() (string, error) {
 
 			probability, err := utils.RandomInt(100)
 			if nil != err {
-				return "", err
+				return nil, err
 			}
 
 			if probability%2 == 1 {
@@ -33,7 +33,7 @@ func GenerateField() (string, error) {
 
 			pos, err = utils.RandomInt(100)
 			if nil != err {
-				return "", err
+				return nil, err
 			}
 
 			if shipCouldBePlacedHere(field, pos, sizes[currentShip], vertical) {
@@ -55,14 +55,14 @@ func GenerateField() (string, error) {
 		}
 	}
 
-	return string(field), nil
+	return field, nil
 }
 
-func shipCouldBePlacedHere(field []rune, pos uint64, size uint64, vertical bool) bool {
-	var startLine uint64
-	var endLine uint64
-	var step uint64         // шаг, на который надо сместиться, чтобы проверить линию корабля
-	var neighborStep uint64 // шаг, на который надо сместиться, чтобы проверить соседние с кораблем клетки
+func shipCouldBePlacedHere(field []byte, pos int64, size int64, vertical bool) bool {
+	var startLine int64
+	var endLine int64
+	var step int64         // шаг, на который надо сместиться, чтобы проверить линию корабля
+	var neighborStep int64 // шаг, на который надо сместиться, чтобы проверить соседние с кораблем клетки
 
 	if !vertical {
 		startLine = pos / 10 * 10
@@ -81,7 +81,7 @@ func shipCouldBePlacedHere(field []rune, pos uint64, size uint64, vertical bool)
 	}
 
 	start := pos
-	if int(pos-1*step) >= 0 {
+	if pos-1*step >= 0 {
 		start = pos - 1*step
 	}
 

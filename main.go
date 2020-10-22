@@ -23,7 +23,7 @@ func renderField(field string) {
 }
 
 func main() {
-	var field [2]string
+	var field [2][]byte
 
 	tmpField, err := generator.GenerateField()
 	if nil != err {
@@ -39,8 +39,7 @@ func main() {
 
 	field[1] = tmpField
 
-	renderField(field[0])
+	renderField(string(field[0]))
 	fmt.Println()
-	fmt.Println()
-	renderField(field[1])
+	//renderField()
 }

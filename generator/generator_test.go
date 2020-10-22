@@ -1,9 +1,12 @@
 package generator
 
-import "testing"
+import (
+	"github.com/mazanax/seabattle/utils"
+	"testing"
+)
 
 func TestShipCouldBePlacedHere(t *testing.T) {
-	var field string
+	var field []byte
 
 	/*
 		_ _ X _ _ X X X X _
@@ -18,20 +21,20 @@ func TestShipCouldBePlacedHere(t *testing.T) {
 		X _ _ _ _ _ X X X _
 	*/
 
-	field="  O  OOOO                 OO   OO      O                       OOO    OO                  O     OOO "
-	if shipCouldBePlacedHere([]rune(field), 2, 1, false) {
+	field = []byte{utils.CellEmpty, utils.CellEmpty, utils.CellShip, utils.CellEmpty, utils.CellEmpty, utils.CellShip, utils.CellShip, utils.CellShip, utils.CellShip, utils.CellEmpty, utils.CellEmpty, utils.CellEmpty, utils.CellEmpty, utils.CellEmpty, utils.CellEmpty, utils.CellEmpty, utils.CellEmpty, utils.CellEmpty, utils.CellEmpty, utils.CellEmpty, utils.CellEmpty, utils.CellEmpty, utils.CellEmpty, utils.CellEmpty, utils.CellEmpty, utils.CellEmpty, utils.CellShip, utils.CellShip, utils.CellEmpty, utils.CellEmpty, utils.CellEmpty, utils.CellShip, utils.CellShip, utils.CellEmpty, utils.CellEmpty, utils.CellEmpty, utils.CellEmpty, utils.CellEmpty, utils.CellEmpty, utils.CellShip, utils.CellEmpty, utils.CellEmpty, utils.CellEmpty, utils.CellEmpty, utils.CellEmpty, utils.CellEmpty, utils.CellEmpty, utils.CellEmpty, utils.CellEmpty, utils.CellEmpty, utils.CellEmpty, utils.CellEmpty, utils.CellEmpty, utils.CellEmpty, utils.CellEmpty, utils.CellEmpty, utils.CellEmpty, utils.CellEmpty, utils.CellEmpty, utils.CellEmpty, utils.CellEmpty, utils.CellEmpty, utils.CellEmpty, utils.CellShip, utils.CellShip, utils.CellShip, utils.CellEmpty, utils.CellEmpty, utils.CellEmpty, utils.CellEmpty, utils.CellShip, utils.CellShip, utils.CellEmpty, utils.CellEmpty, utils.CellEmpty, utils.CellEmpty, utils.CellEmpty, utils.CellEmpty, utils.CellEmpty, utils.CellEmpty, utils.CellEmpty, utils.CellEmpty, utils.CellEmpty, utils.CellEmpty, utils.CellEmpty, utils.CellEmpty, utils.CellEmpty, utils.CellEmpty, utils.CellEmpty, utils.CellEmpty, utils.CellShip, utils.CellEmpty, utils.CellEmpty, utils.CellEmpty, utils.CellEmpty, utils.CellEmpty, utils.CellShip, utils.CellShip, utils.CellShip, utils.CellEmpty}
+	if shipCouldBePlacedHere(field, 2, 1, false) {
 		t.Errorf("Should be false")
 	}
 
-	if shipCouldBePlacedHere([]rune(field), 16, 1, false) {
+	if shipCouldBePlacedHere(field, 16, 1, false) {
 		t.Errorf("Should be false")
 	}
 
-	if shipCouldBePlacedHere([]rune(field), 50, 3, true) {
+	if shipCouldBePlacedHere(field, 50, 3, true) {
 		t.Errorf("Should be false")
 	}
 
-	if shipCouldBePlacedHere([]rune(field), 0, 4, true) {
+	if shipCouldBePlacedHere(field, 0, 4, true) {
 		t.Errorf("Should be false")
 	}
 
@@ -48,8 +51,8 @@ func TestShipCouldBePlacedHere(t *testing.T) {
 		X _ _ _ _ _ X X X _
 	*/
 
-	field="OO   OOOO                 OO   OO      O                       OOO    OO                  O     OOO "
-	if shipCouldBePlacedHere([]rune(field), 10, 1, true) {
+	field = []byte{utils.CellShip, utils.CellShip, utils.CellEmpty, utils.CellEmpty, utils.CellEmpty, utils.CellShip, utils.CellShip, utils.CellShip, utils.CellShip, utils.CellEmpty, utils.CellEmpty, utils.CellEmpty, utils.CellEmpty, utils.CellEmpty, utils.CellEmpty, utils.CellEmpty, utils.CellEmpty, utils.CellEmpty, utils.CellEmpty, utils.CellEmpty, utils.CellEmpty, utils.CellEmpty, utils.CellEmpty, utils.CellEmpty, utils.CellEmpty, utils.CellEmpty, utils.CellShip, utils.CellShip, utils.CellEmpty, utils.CellEmpty, utils.CellEmpty, utils.CellShip, utils.CellShip, utils.CellEmpty, utils.CellEmpty, utils.CellEmpty, utils.CellEmpty, utils.CellEmpty, utils.CellEmpty, utils.CellShip, utils.CellEmpty, utils.CellEmpty, utils.CellEmpty, utils.CellEmpty, utils.CellEmpty, utils.CellEmpty, utils.CellEmpty, utils.CellEmpty, utils.CellEmpty, utils.CellEmpty, utils.CellEmpty, utils.CellEmpty, utils.CellEmpty, utils.CellEmpty, utils.CellEmpty, utils.CellEmpty, utils.CellEmpty, utils.CellEmpty, utils.CellEmpty, utils.CellEmpty, utils.CellEmpty, utils.CellEmpty, utils.CellEmpty, utils.CellShip, utils.CellShip, utils.CellShip, utils.CellEmpty, utils.CellEmpty, utils.CellEmpty, utils.CellEmpty, utils.CellShip, utils.CellShip, utils.CellEmpty, utils.CellEmpty, utils.CellEmpty, utils.CellEmpty, utils.CellEmpty, utils.CellEmpty, utils.CellEmpty, utils.CellEmpty, utils.CellEmpty, utils.CellEmpty, utils.CellEmpty, utils.CellEmpty, utils.CellEmpty, utils.CellEmpty, utils.CellEmpty, utils.CellEmpty, utils.CellEmpty, utils.CellEmpty, utils.CellShip, utils.CellEmpty, utils.CellEmpty, utils.CellEmpty, utils.CellEmpty, utils.CellEmpty, utils.CellShip, utils.CellShip, utils.CellShip, utils.CellEmpty}
+	if shipCouldBePlacedHere([]byte(field), 10, 1, true) {
 		t.Errorf("Should be false")
 	}
 }

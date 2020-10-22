@@ -5,10 +5,10 @@ import (
 	"math/big"
 )
 
-func RandomInt(below int64) (uint64, error) {
+func RandomInt(below int64) (int64, error) {
 	bigInt, err := rand.Int(rand.Reader, big.NewInt(below))
 	if nil != err {
 		return 0, err
 	}
-	return bigInt.Uint64(), nil
+	return bigInt.Int64(), nil
 }
