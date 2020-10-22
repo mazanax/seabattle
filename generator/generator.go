@@ -1,20 +1,19 @@
 package generator
 
 import (
-	"bytes"
 	"github.com/mazanax/seabattle/utils"
 )
 
-var sizes = [4]int64{4, 3, 2, 1}
+var sizes = [4]int8{4, 3, 2, 1}
 
-func GenerateField() ([]byte, error) {
-	field := bytes.Repeat([]byte{utils.CellEmpty}, 100)
-	ships := [4]int64{1, 2, 3, 4}
+func GenerateField() ([2]uint64, error) {
+	field := [2]uint64{utils.CellEmpty, utils.CellEmpty}
+	ships := [4]int8{1, 2, 3, 4}
 	currentShip := 0
 
 	for {
-		var pos int64
-		var step int64
+		var pos int8
+		var step int8
 		var vertical bool
 
 		for {
@@ -23,7 +22,7 @@ func GenerateField() ([]byte, error) {
 
 			probability, err := utils.RandomInt(100)
 			if nil != err {
-				return nil, err
+				return field, err
 			}
 
 			if probability%2 == 1 {
@@ -31,9 +30,9 @@ func GenerateField() ([]byte, error) {
 				step = 10
 			}
 
-			pos, err = utils.RandomInt(100)
+			pos, err = utils.RandomInt8(100)
 			if nil != err {
-				return nil, err
+				return field, err
 			}
 
 			if shipCouldBePlacedHere(field, pos, sizes[currentShip], vertical) {
@@ -42,7 +41,7 @@ func GenerateField() ([]byte, error) {
 		}
 
 		for i := pos; i < pos+sizes[currentShip]*step; i += step {
-			field[i] = utils.CellShip
+			field[i/64] |= utils.CellShip << (63 - i%64)
 		}
 
 		ships[currentShip]--
@@ -58,11 +57,11 @@ func GenerateField() ([]byte, error) {
 	return field, nil
 }
 
-func shipCouldBePlacedHere(field []byte, pos int64, size int64, vertical bool) bool {
-	var startLine int64
-	var endLine int64
-	var step int64         // шаг, на который надо сместиться, чтобы проверить линию корабля
-	var neighborStep int64 // шаг, на который надо сместиться, чтобы проверить соседние с кораблем клетки
+func shipCouldBePlacedHere(field [2]uint64, pos int8, size int8, vertical bool) bool {
+	var startLine int8
+	var endLine int8
+	var step int8         // шаг, на который надо сместиться, чтобы проверить линию корабля
+	var neighborStep int8 // шаг, на который надо сместиться, чтобы проверить соседние с кораблем клетки
 
 	if !vertical {
 		startLine = pos / 10 * 10
@@ -90,15 +89,15 @@ func shipCouldBePlacedHere(field []byte, pos int64, size int64, vertical bool) b
 			continue
 		}
 
-		if int(i-neighborStep) > 0 && field[i-neighborStep] != utils.CellEmpty {
+		if int(i-neighborStep) > 0 && utils.ContainsBit(field[(i-neighborStep)/64], utils.CellShip<<(63-(i-neighborStep)%64)) {
 			return false
 		}
 
-		if field[i] != utils.CellEmpty {
+		if utils.ContainsBit(field[i/64], utils.CellShip<<(63-i%64)) {
 			return false
 		}
 
-		if i+neighborStep < 100 && field[i+neighborStep] != utils.CellEmpty {
+		if i+neighborStep < 100 && utils.ContainsBit(field[(i+neighborStep)/64], utils.CellShip<<(63-(i+neighborStep)%64)) {
 			return false
 		}
 	}

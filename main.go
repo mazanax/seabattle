@@ -6,13 +6,11 @@ import (
 	"github.com/mazanax/seabattle/utils"
 )
 
-func renderField(field string) {
+func renderField(field [2]uint64) {
 	for i := 0; i < 100; i++ {
-		if utils.CellEmpty == field[i] {
+		if !utils.ContainsBit(field[i/64], utils.CellShip<<(63-i%64)) {
 			fmt.Print("_ ")
-		}
-
-		if utils.CellShip == field[i] {
+		} else {
 			fmt.Print("X ")
 		}
 
@@ -23,7 +21,7 @@ func renderField(field string) {
 }
 
 func main() {
-	var field []byte
+	var field [2]uint64
 
 	tmpField, err := generator.GenerateField()
 	if nil != err {
@@ -32,5 +30,6 @@ func main() {
 
 	field = tmpField
 
-	renderField(string(field))
+	renderField(field)
+	fmt.Println(field)
 }
