@@ -1,7 +1,7 @@
 package validator
 
 import (
-	"github.com/mazanax/seabattle/battlefield"
+	bf "github.com/mazanax/seabattle/battlefield"
 	"math/bits"
 )
 
@@ -14,7 +14,7 @@ func ValidateField(field [2]uint64) bool {
 		return false
 	}
 
-	ships := battlefield.ParseShips(field)
+	ships := bf.ParseShips(field)
 	var sizes [4]uint8
 
 	for i := 0; i < 10; i++ {
@@ -31,10 +31,10 @@ func ValidateField(field [2]uint64) bool {
 				int8(ships[i][j]) + 9,  // +10 - 1 нижний левый
 			}
 
-			if corners[0] > 0 && corners[0]%10 != 9 && !battlefield.CellIsEmpty(field, corners[0]) ||
-				corners[1] < 100 && corners[1]/10 == int8(ships[i][j])/10-1 && !battlefield.CellIsEmpty(field, corners[1]) ||
-				corners[2] < 100 && corners[2]/10 == int8(ships[i][j])/10+1 && !battlefield.CellIsEmpty(field, corners[2]) ||
-				corners[3] > 0 && corners[3]%10 != 9 && !battlefield.CellIsEmpty(field, corners[3]) {
+			if corners[0] > 0 && corners[0]%10 != 9 && !bf.CellIsEmpty(field, corners[0]) ||
+				corners[1] < 100 && corners[1]/10 == int8(ships[i][j])/10-1 && !bf.CellIsEmpty(field, corners[1]) ||
+				corners[2] < 100 && corners[2]/10 == int8(ships[i][j])/10+1 && !bf.CellIsEmpty(field, corners[2]) ||
+				corners[3] > 0 && corners[3]%10 != 9 && !bf.CellIsEmpty(field, corners[3]) {
 				return false
 			}
 		}
@@ -55,16 +55,16 @@ func countShips(field [2]uint64) uint8 {
 
 	for i = 0; i < 100; i++ {
 		// проверяем, что предыдущая клетка в этой СТРОКЕ не является частью корабля
-		if i-1 > 0 && (i-1)%10 != 9 && !battlefield.CellIsEmpty(field, i-1) {
+		if i-1 > 0 && (i-1)%10 != 9 && !bf.CellIsEmpty(field, i-1) {
 			continue
 		}
 
 		// проверяем, что предыдущая клетка в этом СТОЛБЦЕ не является частью корабля
-		if i-10 > 0 && !battlefield.CellIsEmpty(field, i-10) {
+		if i-10 > 0 && !bf.CellIsEmpty(field, i-10) {
 			continue
 		}
 
-		if !battlefield.CellIsEmpty(field, i) {
+		if !bf.CellIsEmpty(field, i) {
 			count++
 		}
 	}
