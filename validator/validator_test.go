@@ -133,6 +133,23 @@ func TestValidateField(t *testing.T) {
 	if !ValidateField(field) {
 		t.Errorf("False positive: field is correct")
 	}
+
+	field = createFieldFromString(
+		"" +
+			"_ X _ _ _ _ _ _ _ _" +
+			"_ X _ _ _ X X X _ _" +
+			"_ X _ X _ _ _ _ _ _" +
+			"_ X _ X _ _ X _ X _" +
+			"_ _ _ _ _ _ X _ _ _" +
+			"_ _ _ X _ _ X _ X _" +
+			"_ _ _ X _ _ _ _ _ _" +
+			"_ _ _ _ _ _ X X _ X" +
+			"X _ _ _ _ _ _ _ _ _" +
+			"_ _ _ _ _ _ _ _ _ _",
+	)
+	if !ValidateField(field) {
+		t.Errorf("False positive: field is correct")
+	}
 }
 
 func createFieldFromString(fieldStr string) [2]uint64 {

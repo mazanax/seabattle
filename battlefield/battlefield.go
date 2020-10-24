@@ -44,7 +44,7 @@ func ParseShips(field [2]uint64) [10][]uint8 {
 			continue
 		}
 
-		if (i+1) < 100 && ((i+1)%10 < 10) && !CellIsEmpty(field, i+1) {
+		if (i+1) < 100 && ((i+1)%10 > i%10) && !CellIsEmpty(field, i+1) {
 			step = 1
 		}
 
@@ -53,7 +53,8 @@ func ParseShips(field [2]uint64) [10][]uint8 {
 		}
 
 		for {
-			if CellIsEmpty(field, i+step*offset) {
+			if CellIsEmpty(field, i+step*offset) ||
+				(step == 1 && i%10 > (i+step*offset)%10) { // дошли до конца линии
 				ships[shipIterator] = buffer
 				shipIterator++
 

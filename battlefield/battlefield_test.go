@@ -42,6 +42,7 @@ func TestCellIsShip(t *testing.T) {
 
 func TestParseShips(t *testing.T) {
 	var field [2]uint64
+	var ships [10][]uint8
 
 	field = createFieldFromString(
 		"" +
@@ -56,7 +57,7 @@ func TestParseShips(t *testing.T) {
 			"_ _ X _ _ _ _ _ _ _" +
 			"_ _ _ _ _ _ _ _ _ _",
 	)
-	ships := ParseShips(field)
+	ships = ParseShips(field)
 
 	if !reflect.DeepEqual(ships[0], []uint8{1, 11, 21, 31}) {
 		t.Errorf("The 1st ship placed in [1, 11, 21, 31], but got %+v", ships[0])
@@ -96,6 +97,61 @@ func TestParseShips(t *testing.T) {
 
 	if !reflect.DeepEqual(ships[9], []uint8{82}) {
 		t.Errorf("The 9th ship placed in [82], but got %+v", ships[9])
+	}
+
+	field = createFieldFromString(
+		"" +
+			"_ X _ _ _ _ _ _ _ _" +
+			"_ X _ _ _ X X X _ _" +
+			"_ X _ X _ _ _ _ _ _" +
+			"_ X _ X _ _ X _ X _" +
+			"_ _ _ _ _ _ X _ _ _" +
+			"_ _ _ X _ _ X _ X _" +
+			"_ _ _ X _ _ _ _ _ _" +
+			"_ _ _ _ _ _ X X _ X" +
+			"X _ _ _ _ _ _ _ _ _" +
+			"_ _ _ _ _ _ _ _ _ _",
+	)
+	ships = ParseShips(field)
+
+	if !reflect.DeepEqual(ships[0], []uint8{1, 11, 21, 31}) {
+		t.Errorf("The 1st ship placed in [1, 11, 21, 31], but got %+v", ships[0])
+	}
+
+	if !reflect.DeepEqual(ships[1], []uint8{15, 16, 17}) {
+		t.Errorf("The 2nd ship placed in [15, 16, 17], but got %+v", ships[1])
+	}
+
+	if !reflect.DeepEqual(ships[2], []uint8{23, 33}) {
+		t.Errorf("The 3rd ship placed in [23, 33], but got %+v", ships[3])
+	}
+
+	if !reflect.DeepEqual(ships[3], []uint8{36, 46, 56}) {
+		t.Errorf("The 4th ship placed in [36, 46, 56], but got %+v", ships[4])
+	}
+
+	if !reflect.DeepEqual(ships[4], []uint8{38}) {
+		t.Errorf("The 5th ship placed in [38], but got %+v", ships[4])
+	}
+
+	if !reflect.DeepEqual(ships[5], []uint8{53, 63}) {
+		t.Errorf("The 6th ship placed in [53, 63], but got %+v", ships[5])
+	}
+
+	if !reflect.DeepEqual(ships[6], []uint8{58}) {
+		t.Errorf("The 7th ship placed in [58], but got %+v", ships[6])
+	}
+
+	if !reflect.DeepEqual(ships[7], []uint8{76, 77}) {
+		t.Errorf("The 8th ship placed in [76, 77], but got %+v", ships[7])
+	}
+
+	if !reflect.DeepEqual(ships[8], []uint8{79}) {
+		t.Errorf("The 9th ship placed in [79], but got %+v", ships[8])
+	}
+
+	if !reflect.DeepEqual(ships[9], []uint8{80}) {
+		t.Errorf("The 10th ship placed in [80], but got %+v", ships[9])
 	}
 }
 
