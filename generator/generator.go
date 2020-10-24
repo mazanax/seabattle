@@ -1,13 +1,14 @@
 package generator
 
 import (
+	"github.com/mazanax/seabattle/battlefield"
 	"github.com/mazanax/seabattle/utils"
 )
 
 var sizes = [4]int8{4, 3, 2, 1}
 
 func GenerateField() ([2]uint64, error) {
-	field := [2]uint64{utils.CellEmpty, utils.CellEmpty}
+	field := battlefield.CreateEmpty()
 	ships := [4]int8{1, 2, 3, 4}
 	currentShip := 0
 
@@ -41,7 +42,7 @@ func GenerateField() ([2]uint64, error) {
 		}
 
 		for i := pos; i < pos+sizes[currentShip]*step; i += step {
-			field[i/64] |= utils.CellShip << (63 - i%64)
+			field = battlefield.PlaceShip(field, i)
 		}
 
 		ships[currentShip]--
@@ -89,15 +90,15 @@ func shipCouldBePlacedHere(field [2]uint64, pos int8, size int8, vertical bool) 
 			continue
 		}
 
-		if int(i-neighborStep) > 0 && utils.ContainsBit(field[(i-neighborStep)/64], utils.CellShip<<(63-(i-neighborStep)%64)) {
+		if int(i-neighborStep) > 0 && !battlefield.CellIsEmpty(field, i-neighborStep) {
 			return false
 		}
 
-		if utils.ContainsBit(field[i/64], utils.CellShip<<(63-i%64)) {
+		if !battlefield.CellIsEmpty(field, i) {
 			return false
 		}
 
-		if i+neighborStep < 100 && utils.ContainsBit(field[(i+neighborStep)/64], utils.CellShip<<(63-(i+neighborStep)%64)) {
+		if i+neighborStep < 100 && !battlefield.CellIsEmpty(field, i+neighborStep) {
 			return false
 		}
 	}

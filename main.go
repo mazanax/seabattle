@@ -2,13 +2,15 @@ package main
 
 import (
 	"fmt"
+	"github.com/mazanax/seabattle/battlefield"
 	"github.com/mazanax/seabattle/generator"
-	"github.com/mazanax/seabattle/utils"
+	"github.com/mazanax/seabattle/validator"
 )
 
 func renderField(field [2]uint64) {
-	for i := 0; i < 100; i++ {
-		if !utils.ContainsBit(field[i/64], utils.CellShip<<(63-i%64)) {
+	var i int8
+	for i = 0; i < 100; i++ {
+		if battlefield.CellIsEmpty(field, i) {
 			fmt.Print("_ ")
 		} else {
 			fmt.Print("X ")
@@ -32,4 +34,5 @@ func main() {
 
 	renderField(field)
 	fmt.Println(field)
+	fmt.Println(validator.ValidateField(field))
 }
